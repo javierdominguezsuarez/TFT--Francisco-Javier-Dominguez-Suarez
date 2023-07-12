@@ -1,0 +1,4 @@
+<select #selected (change)="onSelectedOption(selected.value)">
+    <option value=""  disabled selected>{{options[0]}}</option>
+    <option *ngFor="let option of options">{{option}}</option>
+</select>

@@ -1,0 +1,30 @@
+<main *ngIf="step===1">
+    <section class="sentence">
+        <p><span class="first-two-words">Step 1:</span> {{title}}</p>
+    </section>   
+    <section class="lines">
+        <div class="line line-blue"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </section>
+</main>
+<main *ngIf="step===2">
+    <section class="sentence">
+        <p><span class="first-two-words">Step 2:</span> {{title}}</p>
+    </section>   
+    <section class="lines">
+        <div class="line line-blue"></div>
+        <div class="line  line-blue"></div>
+        <div class="line"></div>
+    </section>
+</main>
+<main *ngIf="step===3">
+    <section class="sentence">
+        <p><span class="first-two-words">Step 3:</span> {{title}}</p>
+    </section>   
+    <section class="lines">
+        <div class="line  line-blue"></div>
+        <div class="line  line-blue"></div>
+        <div class="line  line-blue"></div>
+    </section>
+</main>

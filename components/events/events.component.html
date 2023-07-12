@@ -1,0 +1,21 @@
+<main>
+    <section class="events-header">
+        <section class="filters">
+            <app-search-bar (searchEvent)="nameSearch($event)" text="Search your Event"></app-search-bar>
+            <app-filter (filterEvent)="typeSearch($event)"></app-filter>
+        </section>
+        <app-button [routerLink]="['new']" text="Add"></app-button>
+    </section>
+    <section *ngIf="!filtered" class="event-list">
+        <app-event-card *ngFor="let event of events" [name]="event.name" [id]="event.id"
+            [picture]="event.scenePreview"></app-event-card>
+    </section>
+    <section *ngIf="filtered" class="event-list">
+        <app-event-card *ngFor="let event of eventsFiltered" [name]="event.name" [id]="event.id"
+            [picture]="event.scenePreview"></app-event-card>
+    </section>
+    <section *ngIf="(eventsFiltered &&  eventsFiltered.length === 0  && name) || ( events &&  events.length === 0 )" class="error-container">
+        <h2 class="not-found" *ngIf=" eventsFiltered &&  eventsFiltered.length === 0  && name "><span>Whoops!</span> No events found with this name</h2>
+        <h2 class="not-found" *ngIf=" events &&  events.length === 0  "><span>Whoops!</span> No events found </h2>
+    </section>
+</main>

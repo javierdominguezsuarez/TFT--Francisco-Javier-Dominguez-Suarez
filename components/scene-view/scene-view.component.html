@@ -1,0 +1,59 @@
+<main>
+    <section class="scene-header">
+        <i (click)="exit()" class="bi bi-arrow-left"></i>
+        <h1 *ngIf="scene" class="title">{{scene.name}}</h1>
+    </section>
+    <section class="images-filter">
+        <section class="date-type-filter">
+            <input type="date" class="date-input" [ngModel]="date" (ngModelChange)="onDateChange($event)"
+                name="selectedDate" />
+            <app-custom-select placeholder="Type of file" [options]="['Image', 'Video']"
+                (selectedOptionEvent)="onSelectedOption($event)"></app-custom-select>
+        </section>
+        <section class="hour-filter">
+            <input type="time" class="time-input" [ngModel]="startHour" (ngModelChange)="onTimeStartChange($event)"
+                name="startHour" />
+            <input type="time" class="time-input" [ngModel]="endHour" (ngModelChange)="onTimeEndChange($event)"
+                name="endHour" />
+        </section>
+    </section>
+    <app-shadow-loader *ngIf="!imagesMini  && !switch"></app-shadow-loader>
+    <section class="paginated-gallery" *ngIf="!switch">
+        <section class="gallery" *ngIf="imagesPaginated">
+            <img class="miniature" alt="Image of the scene" loading="lazy" *ngFor="let img of  imagesPaginated"
+                src="{{ 'https://minio.qaisc.com/' + img.container + '/' + img.hash }}" [routerLink]="['img',img.hash]">
+        </section>
+        <section class="error-container" *ngIf="imagesPaginated && imagesPaginated.length == 0">
+            <h2 class="not-found" *ngIf="imagesPaginated && imagesPaginated.length == 0"><span>Whoops!</span> No
+                pictures for this date</h2>
+        </section>
+
+        <section class="pagination" *ngIf="imagesPaginated && imagesPaginated.length != 0">
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5,10,20,40,50,100]"
+                (page)="pageChanged($event)">
+            </mat-paginator>
+        </section>
+    </section>
+
+    <app-shadow-loader *ngIf="!videos && switch"></app-shadow-loader>
+    <section class="paginated-gallery" *ngIf="switch">
+        <section class="gallery" *ngIf="videos">
+            <video class="miniature" *ngFor="let vid of videosPaginated" preload="none" controls="true"
+                poster="{{ '/storage/' +imagesMini[videos.indexOf(vid)].container + '/' + imagesMini[videos.indexOf(vid)].hash}}">
+                <source src="{{ '/storage/' + vid.container + '/' + vid.hash }}" type="video/mp4">
+                <figcaption>Video taken during the scene</figcaption>
+            </video>
+        </section>
+        <section class="error-container" *ngIf="videosPaginated && videosPaginated.length == 0">
+        <h2 class="not-found" *ngIf="videosPaginated && videosPaginated.length == 0"><span>Whoops!</span> No
+                videos for this date</h2>
+            </section>
+        <section class="pagination" *ngIf="videosPaginated && videosPaginated.length != 0">
+            <mat-paginator [length]="lengthVideo" [pageSize]="pageSizeVideo" [pageSizeOptions]="[5,10,20,40,50,100]"
+                (page)="pageChangedVideo($event)">
+            </mat-paginator>
+        </section>
+    </section>
+
+
+</main>

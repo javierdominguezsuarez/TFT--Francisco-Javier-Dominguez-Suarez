@@ -1,0 +1,68 @@
+<main>
+    <section class="event-actions">
+        <i (click)="exit()" class="bi bi-arrow-left"></i>
+        <i *ngIf="!menuDisplayed" (click)="menu($event)" class="bi bi-three-dots-vertical"></i>
+        <div class="menu" *ngIf="menuDisplayed">
+            <div class="cross-container">
+                <i (click)="closeMenu()" class="bi bi-x-lg fs-1"></i>
+            </div>
+            <ul>
+                <li (click)="edit()">Edit</li>
+                <li (click)="remove()">Remove</li>
+                <li (click)="duplicate()">Duplicate</li>
+            </ul>
+        </div>
+    </section>
+    <h1>General Information </h1>
+    <section class="description" *ngIf="task">
+        <div class="field">
+            <p class="placeholder">Name</p>
+            <div class="field-box">
+                <p class="field-content">{{task.name}}</p>
+            </div>
+        </div>
+        <div class="field">
+            <p class="placeholder">State</p>
+            <div class="field-box">
+                <p *ngIf="this.schedule && this.schedule.active" class="field-content">Active</p>
+                <p *ngIf="this.schedule && !this.schedule.active" class="field-content">Non Active</p>
+            </div>
+        </div>
+        <div class="field">
+            <p class="placeholder">Start Date</p>
+            <div class="field-box">
+                <p *ngIf="schedule && schedule.start!=null" class="field-content">{{ formatDate(schedule.start) | date:'dd MMMM yyyy' }}</p>
+                <p *ngIf="!schedule || schedule.start==null" class="field-content">No starting date for this event</p>
+            </div>
+        </div>
+        <div class="field">
+            <p class="placeholder">Start Time</p>
+            <div class="field-box">
+                <p *ngIf="schedule && schedule.start!=null" class="field-content">{{ formatDate(schedule.start) | date:'HH:mm'}}</p>
+                <p *ngIf="!schedule || schedule.start==null" class="field-content">No starting time for this event</p>
+            </div>
+        </div>
+        <div class="field">
+            <p class="placeholder">End Date</p>
+            <div class="field-box">
+                <p *ngIf="schedule && schedule.end!=null" class="field-content">{{ formatDate(schedule.end) | date:'dd MMMM yyyy' }}</p>
+                <p *ngIf="!schedule || schedule.end==null" class="field-content">No end date for this event</p>
+            </div>
+        </div>
+        <div class="field">
+            <p class="placeholder">End Time</p>
+            <div class="field-box">
+                <p *ngIf="schedule && schedule.end!=null" class="field-content">{{ formatDate(schedule.end) | date:'HH:mm'}}</p>
+                <p *ngIf="!schedule || schedule.end==null" class="field-content">No end time for this event</p>
+            </div>
+        </div>
+    </section>
+    <h2 class="scene-number-container">
+        <h2 class="scene-number" *ngIf="this.scenes!=undefined">{{this.scenes.length}}</h2>
+        <h2 class="scene-number" *ngIf="this.scenes==undefined">0</h2>Scenes in the Event
+    </h2>
+    <section class="scene-list">
+        <app-scene-card *ngFor="let scene of scenes" [name]="scene.name"
+            [picture]=" '/storage/' + scene.image_id.container + '/' + scene.image_id.hash" [id]="scene.id" ></app-scene-card>
+    </section>
+</main>

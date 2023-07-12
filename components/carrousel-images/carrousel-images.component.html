@@ -1,0 +1,17 @@
+<main>
+    <section class="carrousel-header">
+        <i (click)="exit()" class="bi bi-arrow-left"></i>
+    </section>
+    <section class="img-container">
+        <img  alt="Image of the scene being displayed full size" *ngIf="mainImage" src="{{ '/storage/' + mainImage.container + '/' + mainImage.hash }}">
+        <div class="img-footer">
+            <section class="arrows">
+                <i (click)="previousImage()" class="bi bi-chevron-left"></i>
+                <i (click)="nextImage()" class="bi bi-chevron-right"></i>
+            </section>
+            <section class="download">
+                <i (click)="downloadImage()" class="bi bi-download"></i>
+            </section>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,11 @@
+<main>
+    <div  *ngFor="let scene of scenes" >
+        <p *ngIf="scene!= undefined">
+            {{ scene.name }}
+        </p>
+    </div>
+    <div class="add" (click)="open.emit()">
+        <i class="bi bi-plus icon"></i>
+    </div>
+
+</main>

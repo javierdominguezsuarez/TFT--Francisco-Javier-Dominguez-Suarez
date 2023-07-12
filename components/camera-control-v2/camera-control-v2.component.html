@@ -1,0 +1,168 @@
+<section class="player" #player>
+    <div class="opacity" *ngIf="lock">
+        <section class="caption">
+            <i *ngIf="hover===false" class="bi bi-lock-fill" (dblclick)="unlock()" (mouseenter)="hoverIn()"></i>
+            <i *ngIf="hover===true" class="bi bi-unlock-fill" (dblclick)="unlock()" (mouseleave)="hoverOut()"></i>
+            <p class="swipe-text no-select">Double click the lock to access manual control</p>
+        </section>
+    </div>
+    <div class="control" *ngIf="!lock && !fullScreen" (dblclick)="makeFullScreen()">
+        <section class="top">
+            <div class="circle circle-small up-left"
+                (mousedown)="moveCamera('continuous_move', -this.cameraControlService.currentVel,this.cameraControlService.currentVel, 0)"
+                (mouseup)="stopCamera('stop_move')">
+                <i class="bi bi-chevron-left"></i>
+            </div>
+            <div class="circle" (mousedown)="moveCamera('continuous_move', 0,this.cameraControlService.currentVel, 0)"
+                (mouseup)="stopCamera('stop_move')">
+                <i class="bi bi-chevron-up"></i>
+            </div>
+            <div class="circle circle-small up-right"
+                (mousedown)="moveCamera('continuous_move', this.cameraControlService.currentVel,this.cameraControlService.currentVel, 0)"
+                (mouseup)="stopCamera('stop_move')">
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+        </section>
+        <section id="mid" class="mid">
+            <div class="circle" (mousedown)="moveCamera('continuous_move', -this.cameraControlService.currentVel,0, 0)"
+                (mouseup)="stopCamera('stop_move')">
+                <i class="bi bi-chevron-left"></i>
+            </div>
+            <div class="circle" (mousedown)="moveCamera('continuous_move', this.cameraControlService.currentVel,0, 0)"
+                (mouseup)="stopCamera('stop_move')">
+                <i class="bi bi-chevron-right"></i>
+            </div>
+        </section>
+        <section class="bot">
+
+            <section class="bot-control">
+                <div class="circle circle-small down-left"
+                    (mousedown)="moveCamera('continuous_move', -this.cameraControlService.currentVel, -this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-left"></i>
+                </div>
+                <div class="circle"
+                    (mousedown)="moveCamera('continuous_move', 0, -this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-down"></i>
+                </div>
+                <div class="circle circle-small down-right"
+                    (mousedown)="moveCamera('continuous_move', this.cameraControlService.currentVel, -this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </section>
+            <section class="bar">
+                <div class="bar-left">
+                    <i class="bi bi-square-fill sub-bar" (click)="stopCamera('stop_move')"></i>
+                    <i class="bi bi-input-cursor" (click)="whiper()"></i>
+                    <i class="bi bi-x-square sub-bar" (click)="startCrop()"></i>
+                </div>
+                <div class="bar-mid">
+                    <div class="bar-mid">
+                        <mat-slider min="1" max="10" step="1" discrete>
+                            <input matSliderThumb (input)="onSliderChange($event)">
+                        </mat-slider>
+                    </div>
+                    <i class="bi bi-zoom-in" (mousedown)="zoomCamera('continuous_move',0.1)"
+                        (mouseup)="stopCamera('stop_move')"></i>
+                    <i class="bi bi-zoom-out" (mousedown)="zoomCamera('continuous_move',-0.1)"
+                        (mouseup)="stopCamera('stop_move')"></i>
+                </div>
+
+                <div class="bar-right">
+
+                    <p class="timer">{{timeString}}</p>
+                    <i class="bi bi-download sub-bar" (click)="captureScreenshot()"></i>
+                    <i *ngIf="!fullScreen" class="bi bi-fullscreen sub-bar" (click)="makeFullScreen()"></i>
+                    <i *ngIf="fullScreen" class="bi bi-fullscreen-exit" (click)="scapeFullScreen()"></i>
+                </div>
+
+            </section>
+
+        </section>
+    </div>
+    <div class="control control-container-expanded" *ngIf="!lock && fullScreen" (dblclick)="scapeFullScreen()">
+        <div class="controls-expanded">
+            <section class="top">
+                <div class="circle circle-small up-left"
+                    (mousedown)="moveCamera('continuous_move', -this.cameraControlService.currentVel,this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-left"></i>
+                </div>
+                <div class="circle"
+                    (mousedown)="moveCamera('continuous_move', 0,this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-up"></i>
+                </div>
+                <div class="circle circle-small up-right"
+                    (mousedown)="moveCamera('continuous_move', this.cameraControlService.currentVel,this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+
+            </section>
+            <section id="mid" class="mid">
+                <div class="circle"
+                    (mousedown)="moveCamera('continuous_move', -this.cameraControlService.currentVel,0, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-left"></i>
+                </div>
+                <div class="circle"
+                    (mousedown)="moveCamera('continuous_move', this.cameraControlService.currentVel,0, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </section>
+
+            <section class="bot-control">
+                <div class="circle circle-small down-left"
+                    (mousedown)="moveCamera('continuous_move', -this.cameraControlService.currentVel, -this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-left"></i>
+                </div>
+                <div class="circle"
+                    (mousedown)="moveCamera('continuous_move', 0, -this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-down"></i>
+                </div>
+                <div class="circle circle-small down-right"
+                    (mousedown)="moveCamera('continuous_move', this.cameraControlService.currentVel, -this.cameraControlService.currentVel, 0)"
+                    (mouseup)="stopCamera('stop_move')">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </section>
+        </div>
+        <section class="bar">
+            <div class="bar-left">
+                <i class="bi bi-square-fill sub-bar" (click)="stopCamera('stop_move')"></i>
+                <i class="bi bi-input-cursor" (click)="whiper()"></i>
+                <i class="bi bi-x-square sub-bar" (click)="startCrop()"></i>
+            </div>
+            <div class="bar-mid">
+                <mat-slider min="1" max="10" step="1" discrete>
+                    <input matSliderThumb (input)="onSliderChange($event)">
+                </mat-slider>
+                <i class="bi bi-zoom-in" (mousedown)="zoomCamera('continuous_move',0.1)"
+                    (mouseup)="stopCamera('stop_move')"></i>
+                <i class="bi bi-zoom-out" (mousedown)="zoomCamera('continuous_move',-0.1)"
+                    (mouseup)="stopCamera('stop_move')"></i>
+            </div>
+            <div class="bar-right">
+                <p class="timer">{{timeString}}</p>
+                <i class="bi bi-download sub-bar" (click)="captureScreenshot()"></i>
+                <i *ngIf="!fullScreen" class="bi bi-fullscreen sub-bar" (click)="makeFullScreen()"></i>
+                <i *ngIf="fullScreen" class="bi bi-fullscreen-exit" (click)="scapeFullScreen()"></i>
+            </div>
+        </section>
+
+    </div>
+    <section class="stream-container">
+        <div *ngIf="camera" #parent class="stream" id="stream" allowfullscreen></div>
+        <app-cropper (squareCreated)="onSquareCreated($event)" *ngIf="crop"></app-cropper>
+    </section>
+
+</section>
+<app-toaster #error  *ngIf="zoomError" icon="error" message="Zoom limit reached"></app-toaster>
+<app-toaster #errorBorder  *ngIf="borderError" icon="error" message="The square must be inside of the video"></app-toaster>

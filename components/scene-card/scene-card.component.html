@@ -1,0 +1,8 @@
+<article [routerLink]="['scene',id]">
+    <section class="pic">
+        <img  *ngIf="picture" ngSrc="{{picture}}" width="400" height="200" alt="Scene Preview">
+    </section>
+    <section class="pic-footer">
+        <p>{{ name }}</p>
+    </section>
+</article>

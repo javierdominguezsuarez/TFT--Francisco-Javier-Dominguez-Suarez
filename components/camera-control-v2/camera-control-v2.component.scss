@@ -1,0 +1,259 @@
+:host {
+  display: block;
+}
+
+.stream {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  border-radius: 0.3rem;
+}
+
+.player {
+  position: relative;
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+
+.opacity {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(51, 51, 51, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bi {
+  cursor: pointer;
+}
+
+.bi-lock-fill {
+  color: #fff;
+  font-size: 5rem;
+  opacity: 80%;
+  cursor: pointer;
+}
+
+.bi-unlock-fill {
+  color: #fff;
+  font-size: 5rem;
+  opacity: 80%;
+  cursor: pointer;
+  transform: scaleX(-1);
+}
+
+.swipe-text {
+  color: #fff;
+  opacity: 80%;
+  font-size: 1.4rem;
+}
+
+.caption {
+  height: 40%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+}
+
+
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.control {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.controls-expanded {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 18%;
+  height: 20%;
+  margin-bottom: 3rem;
+}
+
+.controls-expanded .top {
+  width: 70%;
+}
+
+.controls-expanded .bot-control {
+  width: 70%;
+}
+
+
+.control-container-expanded {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.mid {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.bot {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bot-control {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.circle {
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(51, 51, 51, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #fff;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.circle-small {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.up-left {
+  transform: rotate(45deg);
+}
+
+.up-right {
+  transform: rotate(-45deg);
+}
+
+.down-left {
+  transform: rotate(-45deg);
+}
+
+.down-right {
+  transform: rotate(45deg);
+}
+
+.circle:hover {
+  backdrop-filter: blur(20rem);
+  background: rgb(32, 32, 32, 0.95);
+}
+
+.bar {
+  width: 100%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background: rgba(51, 51, 51, 0.75);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.bar-left {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.9rem;
+  align-items: center;
+  width: 15%;
+
+}
+
+.bar-mid {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bar-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.9rem;
+  align-items: center;
+  width: 15%;
+}
+
+
+.mdc-slider__input {
+  width: calc(100% + 20px) !important;
+}
+
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: #fff;
+  --mdc-slider-focus-handle-color: #fff;
+  --mdc-slider-hover-handle-color: #fff;
+  --mdc-slider-active-track-color: #fff;
+  --mdc-slider-inactive-track-color: #fff;
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: #fff;
+  --mat-mdc-slider-ripple-color: transparent;
+  --mat-mdc-slider-hover-ripple-color: transparent;
+  --mat-mdc-slider-focus-ripple-color: transparent;
+}
+
+.mdc-slider__value-indicator-container {
+  display: none;
+}
+
+.timer {
+
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.stream-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 16/9;
+
+}

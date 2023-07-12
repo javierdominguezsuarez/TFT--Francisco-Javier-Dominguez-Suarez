@@ -1,0 +1,94 @@
+:host {
+  display: block;
+}
+main{
+display: flex;
+justify-content:center;
+width: 100%;
+height: 100%;
+font-size: 0.9rem;
+}
+
+.steps{
+  display: flex;
+  justify-content: space-between;
+  width: 70vh;
+  align-items:center;
+}
+.box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 3.6rem;
+  width: 10rem;
+}
+.box p{
+  margin: 0;
+}
+.square{
+  height:100%;
+  width: 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 0.2rem;
+  font-size: 0.8rem;
+}
+.line{
+  height: 0.2rem;
+  width: 30%;
+  border-radius: 0.5rem;
+}
+
+.first-step{
+  .square-one{
+    background-color: #539BBE;
+  }
+  .square-two{
+    background-color: #B1D2E1;
+  }
+  .square-three{
+    background-color: #B1D2E1;
+  }
+  .line-one{
+    background-color: #B1D2E1;
+  }
+  .line-two{
+    background-color: #B1D2E1;
+  }
+}
+.second-step{
+  .square-one{
+    background-color: #539BBE;
+  }
+  .square-two{
+    background-color: #539BBE;
+  }
+  .square-three{
+    background-color: #B1D2E1;
+  }
+  .line-one{
+    background-color: #539BBE;
+  }
+  .line-two{
+    background-color: #B1D2E1;
+  }
+}
+.third-step{
+  .square-one{
+    background-color: #539BBE;
+  }
+  .square-two{
+    background-color: #539BBE;
+  }
+  .square-three{
+    background-color: #539BBE;
+  }
+  .line-one{
+    background-color: #539BBE;
+  }
+  .line-two{
+    background-color: #539BBE;
+  }
+}

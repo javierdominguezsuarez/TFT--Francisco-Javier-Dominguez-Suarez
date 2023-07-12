@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+select{
+  height: 2.3rem;
+  padding-left: 1rem;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+  color: #a6a5a5;
+  font-family: "RedHat Display", sans-serif;
+  cursor: pointer;
+  background-color: white;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a6a5a5' class='bi bi-chevron-down' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  background-position: right 0.5rem center;
+  padding-right: 2rem;
+  display: table-cell;
+  vertical-align: middle;
+  line-height: normal;
+
+}
+select option{
+  border: none;
+}

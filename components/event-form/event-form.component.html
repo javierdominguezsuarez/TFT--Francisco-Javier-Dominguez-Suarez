@@ -1,0 +1,141 @@
+<main>
+    <section class="header">
+        <section class="form-header">
+            <h1 *ngIf="step==1">Add a new event</h1>
+            <h1 *ngIf="step==2">Add scenes to the event</h1>
+            <h1 *ngIf="step==3">Review the event</h1>
+            <i class="bi bi-x-lg" (click)="exit()"></i>
+        </section>
+        <section class="progress">
+            <app-form-progress-square [step]="step"></app-form-progress-square>
+        </section>
+    </section>
+
+
+    <form [formGroup]="firstForm" *ngIf="step===1 && firstForm">
+        <section class="event-data-first">
+            <div class="input-block">
+                <label>Event name</label>
+                <input id="name" type="text" class="form-control" placeholder="Event name" formControlName="name"
+                    required minlength="4" name="name">
+                <app-error-messages [control]="firstForm.get('name')"></app-error-messages>
+            </div>
+            <div class="input-block-check">
+                <label>Activated</label>
+                <input id="activated" type="checkbox" class="form-control" formControlName="activated" name="activated">
+                <app-error-messages [control]="firstForm.get('activated')"></app-error-messages>
+            </div>
+            <div class="input-block">
+                <label>Start date</label>
+                <input id="startDate" type="date" class="form-control" placeholder="Start date"
+                    formControlName="startDate" required name="startDate">
+                <app-error-messages [control]="firstForm.get('startDate')"></app-error-messages>
+            </div>
+            <div class="input-block">
+                <label>End date</label>
+                <input id="endDate" type="date" class="form-control" placeholder="End date" formControlName="endDate"
+                    required name="endDate">
+                <app-error-messages [control]="firstForm.get('endDate')"></app-error-messages>
+            </div>
+            <div class="input-block">
+                <label>Start time</label>
+                <input id="startTime" type="time" class="form-control" placeholder="Start time"
+                    formControlName="startTime" required name="startTime">
+                <app-error-messages [control]="firstForm.get('startTime')"></app-error-messages>
+            </div>
+            <div class="input-block">
+                <label>End time</label>
+                <input id="endTime" type="time" class="form-control" placeholder="End time" formControlName="endTime"
+                    required name="endTime">
+                <app-error-messages [control]="firstForm.get('endTime')"></app-error-messages>
+            </div>
+        </section>
+    </form>
+
+    <section class="event-data-second" *ngIf="step === 2">
+        <app-time-box time="{{time}}" totalTime="{{totalTime}}"> </app-time-box>
+        <div cdkDropList cdkDropListOrientation="horizontal" class="scene-list" (cdkDropListDropped)="drop($event)">
+            <div class="scene-card" *ngFor="let scene of sceneList" cdkDrag>
+                <img alt="Scene Preview" (click)="reopenSceneForm(scene)" src="{{ scene.preview ||  '/storage/' + scene.image_id.container + '/' + scene.image_id.hash }}" />
+                <p>{{ scene.name }}</p>
+            </div>
+            <div>
+                <div class="add" (click)="openSceneForm()">
+                    <i class="bi bi-plus icon"></i>
+                </div>
+                <p>Add new Scene</p>
+            </div>
+            <app-scene-form *ngIf="sceneForm" parentTime={{time}} (exit)="closeSceneForm($event)"></app-scene-form>
+            <app-scene-form draggable="false" [scene]="sceneToModify" [index]="currentIndex" *ngIf="modifySceneForm"
+                parentTime={{time}} (exit)="closeSceneFormModify($event.scene, $event.index)"></app-scene-form>
+        </div>
+    </section>
+
+    <section class="event-data-third" *ngIf="step===3">
+        <section class="title-general">
+            <h1>General Information</h1>
+        </section>
+        <section class="description">
+            <div class="field">
+                <p class="placeholder">Name</p>
+                <div class="field-box">
+                    <p class="field-content">{{ firstForm.value.name }}</p>
+                </div>
+            </div>
+            <div class="field">
+                <p class="placeholder">State</p>
+                <div class="field-box">
+                    <p *ngIf="firstForm.value.activated " class="field-content">Active</p>
+                    <p *ngIf="!firstForm.value.activated" class="field-content">Non Active</p>
+                </div>
+            </div>
+            <div class="field">
+                <p class="placeholder">Start Date</p>
+                <div class="field-box">
+                    <p class="field-content">{{ firstForm.value.startDate }}</p>
+
+                </div>
+            </div>
+            <div class="field">
+                <p class="placeholder">Start Time</p>
+                <div class="field-box">
+                    <p class="field-content">{{ firstForm.value.startTime }}</p>
+                </div>
+            </div>
+            <div class="field">
+                <p class="placeholder">End Date</p>
+                <div class="field-box">
+                    <p class="field-content">{{ firstForm.value.endDate }}</p>
+                </div>
+            </div>
+            <div class="field">
+                <p class="placeholder">End Time</p>
+                <div class="field-box">
+                    <p class="field-content">{{ firstForm.value.endTime }}</p>
+                </div>
+            </div>
+            <h1><span class="title-blue">{{sceneList.length}}</span> Scenes in the Event </h1>
+            <section class="scene-list-preview">
+                <article class="scene-card-preview" *ngFor="let scene of sceneList">
+                    <img alt="Sceme preview" src="{{scene.preview ||  '/storage/' + scene.image_id.container + '/' + scene.image_id.hash}}">
+                    <p>{{scene.name}}</p>
+                </article>
+
+            </section>
+        </section>
+    </section>
+
+    <section class="form-footer-double" *ngIf="this.step > 1">
+        <app-button-negative text="Back" (click)="previousStep()"></app-button-negative>
+        <app-button *ngIf="this.step < 3" text="Next" (click)="nextStep()"></app-button>
+        <app-button *ngIf="this.step === 3" type="submit" (click)="onSubmit()" text="Confirm"
+            (click)="nextStep()"></app-button>
+    </section>
+    <section class="form-footer-single" *ngIf="this.step == 1">
+        <app-button text="Next" (click)="nextStep()"></app-button>
+    </section>
+</main>
+<app-toaster #fieldsError *ngIf="allFieldsError" icon="error" message="All fields must be completed"></app-toaster>
+<app-toaster #dateError *ngIf="dateError" icon="error" message="Dates are not compatible"></app-toaster>
+<app-toaster #sceneAdded *ngIf="sceneAdded" icon="success" message="Scene added to the Event"></app-toaster>
+<app-toaster #sceneModified *ngIf="sceneModified" icon="success" message="Scene modified correctly"></app-toaster>

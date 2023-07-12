@@ -1,0 +1,8 @@
+<article [routerLink]="[id]">
+    <section class="pic">
+        <img loading="lazy" *ngIf="picture" src="{{picture}}" alt="Event Preview">
+    </section>
+    <section class="pic-footer">
+        <p>{{ name }}</p>
+    </section>
+</article>

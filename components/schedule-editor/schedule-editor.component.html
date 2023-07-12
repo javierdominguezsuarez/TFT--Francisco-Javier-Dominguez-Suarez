@@ -1,0 +1,49 @@
+<main>
+    <section  class="form-header">
+        <h1>Edit the schedule of the event</h1>
+        <i class="bi bi-x-lg" (click)="exit()"></i>
+    </section>
+    <form [formGroup]="form" *ngIf=" form">
+        <section class="from-container">
+            <div class="input-block">
+                <label>Event name</label>
+                <input  id="name" type="text" class="form-control" placeholder="Event name" formControlName="name"
+                    required minlength="4" name="name">
+                <app-error-messages [control]="form.get('name')"></app-error-messages>
+            </div>
+            <div class="input-block">
+                <label>Start date</label>
+                <input id="startDate" type="date" class="form-control" placeholder="Start date"
+                    formControlName="startDate" required name="startDate">
+                <app-error-messages [control]="form.get('startDate')"></app-error-messages>
+            </div>
+            <div class="input-block">
+                <label>End date</label>
+                <input id="endDate" type="date" class="form-control" placeholder="End date" formControlName="endDate"
+                    required name="endDate">
+                <app-error-messages [control]="form.get('endDate')"></app-error-messages>
+            </div>
+            <div class="input-block">
+                <label>Start time</label>
+                <input id="startTime" type="time" class="form-control" placeholder="Start time"
+                    formControlName="startTime" required name="startTime">
+                <app-error-messages [control]="form.get('startTime')"></app-error-messages>
+            </div>
+            <div class="input-block">
+                <label>End time</label>
+                <input id="endTime" type="time" class="form-control" placeholder="End time" formControlName="endTime"
+                    required name="endTime">
+                <app-error-messages [control]="form.get('endTime')"></app-error-messages>
+            </div>
+             <div class="input-block-check">
+                <label>Activated</label>
+                <input id="activated" type="checkbox" class="form-control" formControlName="activated" name="activated">
+                <app-error-messages [control]="form.get('activated')"></app-error-messages>
+            </div>
+        </section>
+            
+    </form>
+    <section class="form-footer-single">
+        <app-button text="Confirm" (click)="submit()"></app-button>
+    </section>
+</main>

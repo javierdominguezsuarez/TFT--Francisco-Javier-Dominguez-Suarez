@@ -1,0 +1,8 @@
+<article class="time-box">
+    <div class="circle-progress-bar">
+      <div class="progress" [style.transform]="getProgressScale()"></div>
+    </div>
+    <div class="time">
+      {{ formatTime(time) }} <span class="text-timer">of</span> {{ formatTime(totalTime)}}
+    </div>
+  </article>

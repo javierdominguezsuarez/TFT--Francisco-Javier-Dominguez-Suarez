@@ -1,0 +1,112 @@
+<main>
+    <form class="coordinates-form-data" [formGroup]="secondForm">
+        <div class="top">
+            <section class="form-header">
+                <i class="bi bi-x-lg" (click)="exit.emit(this.scene)"></i>
+            </section>
+            <section class="stepper" *ngIf="step===1">
+                <app-form-progress-line [step]="step" title="Select coordinates"></app-form-progress-line>
+            </section>
+            <section class="stepper" *ngIf="step===2">
+                <app-form-progress-line [step]="step" title="Select preview"></app-form-progress-line>
+            </section>
+            <section class="stepper" *ngIf="step===3">
+                <app-form-progress-line [step]="step" title="Final Step "></app-form-progress-line>
+            </section>
+        </div>
+        <div class="middle" *ngIf="step===1">
+            <app-camera-control-v2 [notification]="notification" (newCoordinates)="updateCoordinates($event)" (image)="setPreview($event)"></app-camera-control-v2>
+            <div class="coordinates-form">
+                <div class="input-block">
+                    <label>Position x</label>
+                    <input id="x" type="text" class="form-control" placeholder="Coordinates" formControlName="x"
+                        required minlength="4" name="x" [disabled]="true">
+                </div>
+                <div class="input-block">
+                    <label>Position y</label>
+                    <input id="y" type="text" class="form-control" placeholder="Coordinates" formControlName="y"
+                        required minlength="4" name="y" [disabled]="true">
+                </div>
+                <div class="input-block">
+                    <label>Position z</label>
+                    <input id="z" type="text" class="form-control" placeholder="Coordinates" formControlName="z"
+                        required minlength="4" name="z" [disabled]="true">
+                </div>
+            </div>
+        </div>
+        <div class="middle-second" *ngIf="step===2">
+            <div class="pic-container">
+                <img alt="Scene Preview" src="{{this.imageSrc}}">
+                <input type="file" #fileInput hidden (change)="handleFileInput($event)">
+                <app-button-soft (click)="fileInput.click()" class="upload-button" text="Upload"></app-button-soft>
+            </div>
+        </div>
+
+        <div class="middle-third" *ngIf="step===3">
+            <form [formGroup]="secondForm" class="scene-data">
+                <section class="mid-form-input">
+                    <div class="input-block-medium">
+                        <label>Scene name</label>
+                        <input id="name" type="text" class="form-control" placeholder="Insert the scene name"
+                            formControlName="name" required minlength="4" name="name">
+                        <app-error-messages [control]="secondForm.get('name')"></app-error-messages>
+                    </div>
+                    <div class="input-block-medium">
+                        <label>Image focus time</label>
+                        <input id="focusTime" type="number" class="form-control"
+                            placeholder="Insert Image focus time (seconds) " formControlName="focusTime"
+                            name="focusTime">
+                        <app-error-messages [control]="secondForm.get('focusTime')"></app-error-messages>
+                    </div>
+                </section>
+                <section class="mid-form-input">
+                    <div class="input-block-medium">
+                        <label>Scene Priority</label>
+                        <input id="priority" type="number" class="form-control"
+                            placeholder="Insert the order of the scene" formControlName="priority" required
+                            name="priority">
+                        <app-error-messages [control]="secondForm.get('priority')"></app-error-messages>
+                    </div>
+                    <div class="input-block-medium">
+                        <label>Video time</label>
+                        <input id="videoTime" type="number" class="form-control"
+                            placeholder="Insert the duration (seconds)" formControlName="videoTime" name="videoTime">
+                        <app-error-messages [control]="secondForm.get('videoTime')"></app-error-messages>
+                    </div>
+                </section>
+                <section class="mid-form-input">
+                    <div class="checkbox-group">
+                        <label>Video</label>
+                        <input type="checkbox" formControlName="video">
+                        <label>Picture</label>
+                        <input type="checkbox" formControlName="pic">
+                    </div>
+                    <div class="checkbox-group">
+                        <app-time-box time="{{time}}" totalTime="{{totalTime}}"> </app-time-box>
+                    </div>
+                </section>
+            </form>
+        </div>
+
+        <div class="bottom">
+            <section class="form-footer-double" *ngIf="this.step > 1">
+                <app-button-negative text="Back" (click)="previousStep()"></app-button-negative>
+                <app-button *ngIf="this.step < 3" text="Next" (click)="nextStep()"></app-button>
+                <app-button *ngIf="this.step === 3" type="submit" (click)="onSubmit()" text="Confirm"
+                    (click)="nextStep()"></app-button>
+            </section>
+            <section class="form-footer-single" *ngIf="this.step === 1">
+                <app-button text="Next" (click)="nextStep()"></app-button>
+            </section>
+        </div>
+
+    </form>
+</main>
+<app-toaster #coordinatesError *ngIf="coordinatesError" icon="error" message="Coordinates are empty "></app-toaster>
+<app-toaster #videoTimeError *ngIf="videoTimeError" icon="error"
+    message="Video time empty or above 90 seconds "></app-toaster>
+<app-toaster #focusTimeError *ngIf="focusTimeError" icon="error" message="Wrong focus time "></app-toaster>
+<app-toaster #emptyError *ngIf="noPicVideoError" icon="error" message="The scene can't be empty"></app-toaster>
+<app-toaster #emptyNameError *ngIf="emptyNameError" icon="error" message="The scene name can't be empty"></app-toaster>
+<app-toaster #priorityError *ngIf="priorityError" icon="error" message="The scene need a number of order"></app-toaster>
+<app-toaster #totalTimeError *ngIf="totalTimeError" icon="error" message="The  time is over 5 minutes "></app-toaster>

@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+label {
+  display: flex;
+
+}
+
+input {
+  all: unset;
+  border: solid 0.063rem #a6a5a5;
+  height: 2.25rem;
+  width: 14rem;
+  border-radius: 0.3rem 0px 0px 0.3rem;
+  border-right: none;
+  padding-left: 0.4rem;
+  cursor: text;
+}
+
+button {
+  background-color: #0078b2;
+  border: 0.063rem transparent;
+  height: 2.375rem;
+  width: 2.25rem;
+  border-radius: 0px 0.3rem 0.3rem 0px;
+}
+
+button:hover img {
+  height: 64%;
+  width: 64%;
+}
+
+button:hover {
+  background-color: #0682c0;
+
+}
