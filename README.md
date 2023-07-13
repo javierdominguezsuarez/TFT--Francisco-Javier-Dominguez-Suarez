@@ -34,7 +34,7 @@ Este código pertenece al módulo creado durante el trabajo, denominado "Events"
 
 **ULPGC**
 * Web: [Universidad de las Palmas de Gran Canaria](https://www.ulpgc.es/)
-* LinkedIn: [Universidad de las Palmas de Gran Canaria](https://www.linkedin.com/school/universidad-de-las-palmas-de-gran-canaria/?originalSubdomain=es)
+* LinkedIn: [@Universidad de las Palmas de Gran Canaria](https://www.linkedin.com/school/universidad-de-las-palmas-de-gran-canaria/?originalSubdomain=es)
 
 ## Licencia de uso 📋
 Este código se ha realizado en un ámbito empresarial, por lo que aun formando parte de un Trabajo Fin de Grado, se ruega no compartir bajo ningún concepto y no hacer ningún uso de el mismo, salvo los que se comprendan en el ámbito de las actividades de evaluación relacionadas con su defensa ante un tribunal de TFT.
